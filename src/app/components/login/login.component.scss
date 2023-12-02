@@ -1,0 +1,17 @@
+.login-container {
+  padding: 64px;
+  display: flex;
+  justify-content: center;
+
+  mat-card {
+    width: 600px;
+  }
+
+  .form-wrap {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    gap: 8px;
+  }
+}

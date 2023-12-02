@@ -1,0 +1,83 @@
+<div class="pizza-menu-container">
+  <div class="page-header">
+    <h1>Nossos Sabores</h1>
+
+    <!-- <button mat-button
+            (click)="createPizza()">Cadastrar Pizza</button> -->
+  </div>
+
+  <mat-card *ngFor="let pizza of pizzas"
+            class="pizza-card">
+    <mat-card-header>
+      <mat-card-title>{{ pizza.name}}</mat-card-title>
+      <mat-card-subtitle>{{ pizza.price}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image
+         [src]="pizza.imageUrl">
+    <mat-card-content>
+      <p>
+        {{ pizza.description}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <form class="card-form"
+        [formGroup]="pizzaForm">
+
+    <div class="form-wrap"
+         formArrayName="pizzas">
+      <mat-card class="form-card"
+                *ngFor="let pizza of formPizzas.controls; let i = index"
+                [formGroupName]="i">
+        <button mat-icon-button
+                *ngIf="formPizzas.controls.length !== 1"
+                (click)="removePizza(i)"
+                class="close-button"
+                aria-label="Example icon button with a vertical three dot icon">
+          <mat-icon>clear</mat-icon>
+        </button>
+        <mat-card-content>
+          <mat-form-field>
+            <mat-label>Nome:</mat-label>
+            <input type="text"
+                   formControlName="name"
+                   matInput>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Preco:</mat-label>
+            <input type="number"
+                   formControlName="price"
+                   matInput>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Descrição:</mat-label>
+            <input type="text"
+                   formControlName="description"
+                   matInput>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Url imagem:</mat-label>
+            <input type="url"
+                   formControlName="imageUrl"
+                   matInput>
+          </mat-form-field>
+        </mat-card-content>
+        <button mat-button
+                *ngIf="i === formPizzas.controls.length-1"
+                (click)="addPizza()">Adicionar outra Pizza</button>
+      </mat-card>
+
+      <button mat-raised-button (click)="savePizzas()">
+            Salvar novos sabores
+          </button>
+    </div>
+  </form>
+
+</div>
