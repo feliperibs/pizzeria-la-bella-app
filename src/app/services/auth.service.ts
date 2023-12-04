@@ -3,23 +3,27 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { IUser } from '../model/user.inteface';
 import { ILoginResponse } from '../model/login-response.interface';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  public user: IUser | undefined;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private userService: UserService) {}
 
   login(email: string, password: string): Observable<IUser> {
     return this.http
       .post<ILoginResponse>('/api/auth/login', { email, password })
       .pipe(map((response) => {
         this.setToken(response.token);
-        this.user = response.user;
+        this.userService.setUser(response.user);
         return response.user;
       }));
+  }
+
+  public get isLogged(): boolean {
+    return !!this.getToken();
   }
 
   private setToken(token: string): void {
@@ -30,7 +34,7 @@ export class AuthService {
     return localStorage.getItem('auth_token');
   };
 
-  public getUser(): IUser | undefined {
-    return this.user;
-  };
+  public logOut(): void {
+    localStorage.removeItem('auth_token')
+  }
 }

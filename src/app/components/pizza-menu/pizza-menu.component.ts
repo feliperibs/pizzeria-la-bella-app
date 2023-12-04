@@ -16,19 +16,19 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { NewPizzaFormComponent } from './new-pizza-form/new-pizza-form.component';
 
 @Component({
   selector: 'app-pizza-menu',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    ReactiveFormsModule,
     MatIconModule,
+    NewPizzaFormComponent,
   ],
   templateUrl: './pizza-menu.component.html',
   styleUrl: './pizza-menu.component.scss',
@@ -36,49 +36,22 @@ import { MatIconModule } from '@angular/material/icon';
 export class PizzaMenuComponent implements OnInit {
   pizzas: IPizza[] = [];
   pizzaForm!: FormGroup;
+  showAddPizzas = false;
 
   constructor(
     private pizzaService: PizzaService,
-    private formBuilder: FormBuilder
+
   ) {}
 
   ngOnInit(): void {
-    this.pizzaForm = this.formBuilder.group({
-      pizzas: this.formBuilder.array([this.createPizzaGroup()]),
-    });
+    this.getPizzas();
+  }
 
+  createPizza(): void {
+    this.showAddPizzas = true
+  }
+
+  getPizzas(): void {
     this.pizzaService.getPizzas().subscribe((pizzas) => (this.pizzas = pizzas));
-  }
-
-  createPizzaGroup(): FormGroup {
-    return this.formBuilder.group({
-      name: ['', Validators.required],
-      price: ['', Validators.required],
-      description: ['', Validators.required],
-      imageUrl: ['', Validators.required],
-    });
-  }
-
-  get formPizzas(): FormArray {
-    return this.pizzaForm.get('pizzas') as FormArray;
-  }
-
-  get formControls() {
-    return this.pizzaForm.controls;
-  }
-
-  addPizza() {
-    this.formPizzas.push(this.createPizzaGroup());
-  }
-
-  removePizza(index: number) {
-    this.formPizzas.removeAt(index);
-  }
-
-  savePizzas(): void {
-    this.pizzaService.createPizzas(this.formPizzas.value)
-      .subscribe(pizzas => {
-        debugger
-      })
   }
 }

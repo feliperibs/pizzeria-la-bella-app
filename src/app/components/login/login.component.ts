@@ -81,4 +81,8 @@ export class LoginComponent {
         );
     }
   }
+
+  gotToNewUser(): void {
+    this.router.navigate(['/new-user']);
+  }
 }

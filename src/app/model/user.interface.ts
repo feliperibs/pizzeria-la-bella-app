@@ -10,8 +10,8 @@ export interface IUser {
     city: string;
     state: string;
   };
-  creation_date?: Moment;
+  creation_date: Moment;
   email: string;
   password: string;
-  is_admin?: boolean;
+  is_admin: boolean;
 }
