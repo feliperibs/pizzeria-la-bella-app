@@ -14,7 +14,7 @@ export class AuthService {
 
   login(email: string, password: string): Observable<IUser> {
     return this.http
-      .post<ILoginResponse>('/api/auth/login', { email, password })
+      .post<ILoginResponse>('https://pizzaria-la-bella-api.netlify.app/api/auth/login', { email, password })
       .pipe(map((response) => {
         this.setToken(response.token);
         this.userService.setUser(response.user);

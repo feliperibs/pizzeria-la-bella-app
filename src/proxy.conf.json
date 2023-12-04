@@ -1,9 +1,9 @@
 {
-  "/api": {
+  "https://pizzaria-la-bella-api.netlify.app": {
     "target": "http://localhost:4000/api",
     "secure": false,
     "pathRewrite": {
-      "^/api": ""
+      "^https://pizzaria-la-bella-api.netlify.appi": ""
     }
   }
 }
