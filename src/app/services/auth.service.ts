@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
-import { IUser } from '../model/user.inteface';
+import { BehaviorSubject, Observable, map } from 'rxjs';
+import { IUser } from '../model/user.interface';
 import { ILoginResponse } from '../model/login-response.interface';
 import { UserService } from './user.service';
 
@@ -9,21 +9,24 @@ import { UserService } from './user.service';
   providedIn: 'root',
 })
 export class AuthService {
-
-  constructor(private http: HttpClient, private userService: UserService) {}
+  isLogged = new BehaviorSubject<boolean>(false);
+  constructor(private http: HttpClient, private userService: UserService) {
+    if (!!this.getToken()) {
+      this.isLogged.next(true);
+    }
+  }
 
   login(email: string, password: string): Observable<IUser> {
     return this.http
-      .post<ILoginResponse>('https://pizzaria-la-bella-api.netlify.app/api/auth/login', { email, password })
-      .pipe(map((response) => {
-        this.setToken(response.token);
-        this.userService.setUser(response.user);
-        return response.user;
-      }));
-  }
-
-  public get isLogged(): boolean {
-    return !!this.getToken();
+      .post<ILoginResponse>('/api/auth/login', { email, password })
+      .pipe(
+        map((response) => {
+          this.setToken(response.token);
+          this.userService.setUser(response.user);
+          this.isLogged.next(true);
+          return response.user;
+        })
+      );
   }
 
   private setToken(token: string): void {
@@ -32,9 +35,10 @@ export class AuthService {
 
   public getToken(): string | null {
     return localStorage.getItem('auth_token');
-  };
+  }
 
   public logOut(): void {
-    localStorage.removeItem('auth_token')
+    localStorage.removeItem('auth_token');
+    this.isLogged.next(false);
   }
 }

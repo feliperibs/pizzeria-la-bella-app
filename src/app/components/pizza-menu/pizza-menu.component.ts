@@ -17,6 +17,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { NewPizzaFormComponent } from './new-pizza-form/new-pizza-form.component';
+import { UserService } from '../../services/user.service';
+import { OrderService } from '../../services/order.service';
 
 @Component({
   selector: 'app-pizza-menu',
@@ -37,14 +39,17 @@ export class PizzaMenuComponent implements OnInit {
   pizzas: IPizza[] = [];
   pizzaForm!: FormGroup;
   showAddPizzas = false;
+  isAdmin !: boolean;
 
   constructor(
     private pizzaService: PizzaService,
-
+    private userService: UserService,
+    private orderService: OrderService
   ) {}
 
   ngOnInit(): void {
     this.getPizzas();
+    this.userService.isAdmin.subscribe((value) => {this.isAdmin = value})
   }
 
   createPizza(): void {
@@ -53,5 +58,9 @@ export class PizzaMenuComponent implements OnInit {
 
   getPizzas(): void {
     this.pizzaService.getPizzas().subscribe((pizzas) => (this.pizzas = pizzas));
+  }
+
+  addToOrder(pizzaId: string) {
+    this.orderService.addPizzaToOder(pizzaId);
   }
 }

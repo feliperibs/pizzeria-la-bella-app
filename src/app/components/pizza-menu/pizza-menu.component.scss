@@ -10,11 +10,13 @@
 .menu-wrap {
   display: flex;
   gap: 24px;
+  flex-wrap: wrap
 }
 
 
 .pizza-card {
   max-width: 300px;
+  justify-content: space-between;
    * {
     color: #fff !important;
    }

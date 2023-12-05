@@ -5,15 +5,8 @@
     </mat-card-header>
     <mat-card-content>
 
-    </mat-card-content>
-  </mat-card>
-
-  <form class="card-form"
-        [formGroup]="userForm">
-
-    <div class="form-wrap">
-      <mat-card class="form-card">
-        <mat-card-content>
+      <form class="card-form"
+            [formGroup]="userForm">
           <mat-form-field>
             <mat-label>Nome:</mat-label>
             <input type="text"
@@ -29,31 +22,31 @@
           <mat-form-field>
             <mat-label>Rua:</mat-label>
             <input type="text"
-                   formControlName="name"
+                   formControlName="street"
                    matInput>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Número:</mat-label>
             <input type="text"
-                   formControlName="name"
+                   formControlName="number"
                    matInput>
           </mat-form-field>
           <mat-form-field>
             <mat-label>CEP:</mat-label>
             <input type="text"
-                   formControlName="name"
+                   formControlName="postcode"
                    matInput>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Cidade:</mat-label>
             <input type="text"
-                   formControlName="name"
+                   formControlName="city"
                    matInput>
           </mat-form-field>
           <mat-form-field>
-            <mat-label>Estadeo:</mat-label>
+            <mat-label>Estado:</mat-label>
             <input type="text"
-                   formControlName="name"
+                   formControlName="state"
                    matInput>
           </mat-form-field>
 
@@ -65,18 +58,20 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Senha:</mat-label>
-            <input type="text"
+            <input type="password"
                    formControlName="password"
                    matInput>
           </mat-form-field>
+      </form>
+    </mat-card-content>
 
-        </mat-card-content>
-      </mat-card>
-
-      <button mat-raised-button
+    <mat-card-actions class="submit-button">
+      <button mat-raised-button color="primary"
               (click)="createUser()">
         Criar usuário
       </button>
-    </div>
-  </form>
+    </mat-card-actions>
+  </mat-card>
+
+
 </div>

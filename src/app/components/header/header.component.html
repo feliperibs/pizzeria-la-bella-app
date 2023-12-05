@@ -1,14 +1,44 @@
 <header class="header">
   <img src="assets/logo-header.png"
-       alt="lgoo">
+       alt="logo">
   <div class="nav-wrap">
-    <a [routerLink]="['/']">Home</a>
-    <a href="#">Sobre nós</a>
-    <a [routerLink]="['/menu']">Cardápio</a>
-    <a href="#">Contatos</a>
-    <a [routerLink]="['/login']">Log in</a>
+    <a [routerLink]="['/']">Cardápio</a>
+    <a [routerLink]="['/my-orders']">Meus pedidos</a>
+    <a *ngIf="isAdmin"
+       [routerLink]="['/all-orders']">Todos pedidos</a>
+    <a *ngIf="!isLogged"
+       [routerLink]="['/login']">Log in</a>
+    <a *ngIf="isLogged"
+       (click)="logout()">Log out</a>
   </div>
-  <button mat-raised-button>
-    Fazer pedido
+  <button mat-mini-fab
+          color="primary"
+          [matMenuTriggerFor]="menu">
+    <mat-icon>shopping_cart</mat-icon>
   </button>
+
+  <mat-menu #menu="matMenu"
+            panelClass="cart-menu">
+    <ng-container *ngIf="addedPizzas.length > 0; else noOrder ">
+      <h3>Seu pedido</h3>
+      <div *ngFor="let pizza of addedPizzas"
+           class="pizza-wrap">
+        <img [src]="pizza.imageUrl"
+             class="pizza-image">
+        <span class="pizza-title">{{pizza.name}}</span>
+        <span class="pizza-title">{{pizza.price}}</span>
+
+      </div>
+
+      <button mat-raised-button
+              class="submit-button"
+              color="primary"
+              (click)="createOrder()">
+        Finalizar pedido
+      </button>
+    </ng-container>
+    <ng-template #noOrder>
+      <h3>Pedido vazio por enquanto</h3>
+    </ng-template>
+  </mat-menu>
 </header>

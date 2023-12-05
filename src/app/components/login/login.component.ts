@@ -42,7 +42,7 @@ export class LoginComponent {
     private formBuild: UntypedFormBuilder,
     private authService: AuthService,
     private router: Router,
-    private _snackBar: MatSnackBar
+    private snackBar: MatSnackBar
   ) {
     this.loginFormGroup = this.formBuild.group({
       email: [undefined, [Validators.required, Validators.email]],
@@ -51,7 +51,7 @@ export class LoginComponent {
   }
 
   openSnackBar(message: string) {
-    this._snackBar.open(message, 'Fechar', {
+    this.snackBar.open(message, 'Fechar', {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });
@@ -67,7 +67,7 @@ export class LoginComponent {
         .subscribe(
           (user) => {
             if (user) {
-              this.router.navigate(['/home']);
+              this.router.navigate(['/']);
             }
           },
           (err) => {

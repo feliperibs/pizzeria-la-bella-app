@@ -1,26 +1,31 @@
 import { Injectable } from '@angular/core';
-import { IUser } from '../model/user.inteface';
+import { IUser, IUserRequest } from '../model/user.interface';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { IPizza } from '../model/pizza-interface';
-
+import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private http: HttpClient) {}
+  isAdmin = new BehaviorSubject<boolean>(false)
+  constructor(private http: HttpClient) {
+    this.user = !!localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') as string) : null;~
+    this.isAdmin.next(!!this.user.is_admin);
+
+  }
 
   user!: IUser;
 
   getUsers(): Observable<IUser[]> {
-    return this.http.get<IUser[]>('https://pizzaria-la-bella-api.netlify.app/api/users');
+    return this.http.get<IUser[]>('/api/users');
   }
 
   setUser(user: IUser): void {
+    localStorage.setItem('user', JSON.stringify(user))
     this.user = user;
+    this.isAdmin.next(!!user.is_admin);
   }
 
-  createUser(user: IUser): Observable<IUser> {
-    return this.http.post<IUser>('https://pizzaria-la-bella-api.netlify.app/api/user/create', { user });
+  createUser(user: IUserRequest): Observable<IUser> {
+    return this.http.post<IUser>('/api/users/create', user);
   }
 }

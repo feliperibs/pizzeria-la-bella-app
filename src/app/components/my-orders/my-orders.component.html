@@ -1,0 +1,50 @@
+<div class="my-orders-container">
+  <h1>Meus pedidos</h1>
+
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+
+  <table mat-table
+         [dataSource]="orders"
+         class="mat-elevation-z8"
+         *ngIf="!isLoading">
+
+    <ng-container matColumnDef="number">
+      <th mat-header-cell
+          *matHeaderCellDef> No. </th>
+      <td mat-cell
+          *matCellDef="let element; let i=index"> {{i}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="orderDate">
+      <th mat-header-cell
+          *matHeaderCellDef> Data </th>
+      <td mat-cell
+          *matCellDef="let element"> {{ element.orderDate | date: 'dd/MM/YYYY HH:mm'}}  </td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell
+          *matHeaderCellDef> Valor </th>
+      <td mat-cell
+          *matCellDef="let element"> R${{element.totalPrice}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pizzas">
+      <th mat-header-cell
+          *matHeaderCellDef> Pizzas </th>
+      <td mat-cell
+          *matCellDef="let element">
+        <div class="pizza-wrap"
+             *ngFor="let pizza of element.pizzas">
+          <span>{{pizza.name}}</span>
+          <span>{{pizza.price}}</span>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row
+        *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row
+        *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

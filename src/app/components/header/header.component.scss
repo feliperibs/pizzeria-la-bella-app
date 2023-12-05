@@ -20,3 +20,28 @@
     color: #fff;
   }
 }
+
+::ng-deep .mat-mdc-menu-content {
+  padding: 16px !important;
+  min-width: 230px;
+
+  .submit-button {
+    width: 100%;
+  }
+
+  .pizza-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  h3,.pizza-title, .pizza-price {
+    color: #fff;
+  }
+
+  .pizza-image {
+    height: 50px;
+    width: 50px;
+  }
+}
