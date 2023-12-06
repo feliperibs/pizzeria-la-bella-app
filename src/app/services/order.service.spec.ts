@@ -36,7 +36,7 @@ describe('OrderService', () => {
 
       service.getUserOrders(userId);
 
-      expect(httpClientSpy.get).toHaveBeenCalledWith('https://pizzaria-la-bella-api.netlify.app/orders/user/' + userId);
+      expect(httpClientSpy.get).toHaveBeenCalledWith('https://pizzaria-la-bella-api.netlify.app/api/orders/user/' + userId);
     });
   });
 
@@ -48,7 +48,7 @@ describe('OrderService', () => {
 
       service.getAllOrders();
 
-      expect(httpClientSpy.get).toHaveBeenCalledWith('https://pizzaria-la-bella-api.netlify.app/orders/');
+      expect(httpClientSpy.get).toHaveBeenCalledWith('https://pizzaria-la-bella-api.netlify.app/api/orders/');
     });
   });
 
