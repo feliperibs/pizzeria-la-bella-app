@@ -1,31 +1,35 @@
 <div class="pizza-menu-container">
-  <div class="page-header">
-    <h1>Nossos Sabores</h1>
+  <ng-container *ngIf="!showAddPizzas">
+    <div class="page-header">
+      <h1>Nossos Sabores</h1>
 
-    <button mat-raised-button *ngIf="isAdmin"
-            (click)="createPizza()">Cadastrar Pizza</button>
-  </div>
+      <button mat-raised-button
+              *ngIf="isAdmin"
+              (click)="createPizza()">Cadastrar Pizza</button>
+    </div>
 
-  <div class="menu-wrap">
-    <mat-card *ngFor="let pizza of pizzas"
-              class="pizza-card">
-      <mat-card-header>
-        <mat-card-title>{{ pizza.name}}</mat-card-title>
-        <mat-card-subtitle>{{ pizza.price}}</mat-card-subtitle>
-      </mat-card-header>
-      <img mat-card-image
-           [src]="pizza.imageUrl">
-      <mat-card-content>
-        <p>
-          {{ pizza.description}}
-        </p>
-      </mat-card-content>
-      <mat-card-footer>
-        <button mat-button color="primary"
-            (click)="addToOrder(pizza._id)">Adicionar ao pedido</button>
-      </mat-card-footer>
-    </mat-card>
-  </div>
+    <div class="menu-wrap">
+      <mat-card *ngFor="let pizza of pizzas"
+                class="pizza-card">
+        <mat-card-header>
+          <mat-card-title>{{ pizza.name}}</mat-card-title>
+          <mat-card-subtitle>{{ pizza.price}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image
+             [src]="pizza.imageUrl">
+        <mat-card-content>
+          <p>
+            {{ pizza.description}}
+          </p>
+        </mat-card-content>
+        <mat-card-footer>
+          <button mat-button
+                  color="primary"
+                  (click)="addToOrder(pizza._id)">Adicionar ao pedido</button>
+        </mat-card-footer>
+      </mat-card>
+    </div>
+  </ng-container>
 
 
   <app-new-pizza-form *ngIf="showAddPizzas"

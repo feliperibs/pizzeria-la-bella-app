@@ -83,6 +83,7 @@ export class HeaderComponent implements OnInit {
           verticalPosition: this.verticalPosition,
         });
         this.orderService.clearOrder();
+        this.router.navigate(['/my-orders']);
       });
     } else {
       this.router.navigate(['/login']);

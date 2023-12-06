@@ -51,6 +51,7 @@ export class PizzaMenuComponent implements OnInit {
   }
 
   getPizzas(): void {
+    this.showAddPizzas = false;
     this.pizzaService.getPizzas().subscribe((pizzas) => (this.pizzas = pizzas));
   }
 
