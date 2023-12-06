@@ -23,19 +23,19 @@ export class OrderService {
         pizzasIds: this.pizzaIds,
       };
 
-      return this.http.post<IOrder>('/api/orders/create', request);
+      return this.http.post<IOrder>('https://pizzaria-la-bella-api.netlify.app/orders/create', request);
     } else {
       throw new Error('Need to add one pizza');
     }
   }
 
   getUserOrders(userId: string): Observable<IOrder[]> {
-    return this.http.get<IOrder[]>('/api/orders/user/' + userId);
+    return this.http.get<IOrder[]>('https://pizzaria-la-bella-api.netlify.app/orders/user/' + userId);
   }
 
 
   getAllOrders(): Observable<IOrder[]> {
-    return this.http.get<IOrder[]>('/api/orders/');
+    return this.http.get<IOrder[]>('https://pizzaria-la-bella-api.netlify.app/orders/');
   }
 
   clearOrder(): void {

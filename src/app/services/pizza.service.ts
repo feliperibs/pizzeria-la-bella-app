@@ -10,13 +10,13 @@ export class PizzaService {
   constructor(private http: HttpClient) {}
 
   getPizzas(): Observable<IPizza[]> {
-    return this.http.get<IPizza[]>('/api/pizzas');
+    return this.http.get<IPizza[]>('https://pizzaria-la-bella-api.netlify.app/pizzas');
   }
   getPizza(id: string): Observable<IPizza> {
-    return this.http.get<IPizza>('/api/pizzas/' + id);
+    return this.http.get<IPizza>('https://pizzaria-la-bella-api.netlify.app/pizzas/' + id);
   }
 
   createPizzas(pizzas: IPizzaRequest[]): Observable<IPizza[]> {
-    return this.http.post<IPizza[]>('/api/pizzas/create', pizzas);
+    return this.http.post<IPizza[]>('https://pizzaria-la-bella-api.netlify.app/pizzas/create', pizzas);
   }
 }

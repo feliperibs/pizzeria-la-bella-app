@@ -49,7 +49,7 @@ describe('AuthService', () => {
 
       service.login(email, password).subscribe();
 
-      expect(httpClientSpy.post).toHaveBeenCalledWith('/api/auth/login', {
+      expect(httpClientSpy.post).toHaveBeenCalledWith('https://pizzaria-la-bella-api.netlify.app/auth/login', {
         email,
         password,
       });

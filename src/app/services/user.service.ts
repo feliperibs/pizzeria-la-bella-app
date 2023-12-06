@@ -16,7 +16,7 @@ export class UserService {
   user!: IUser;
 
   getUsers(): Observable<IUser[]> {
-    return this.http.get<IUser[]>('/api/users');
+    return this.http.get<IUser[]>('https://pizzaria-la-bella-api.netlify.app/users');
   }
 
   setUser(user: IUser): void {
@@ -26,6 +26,6 @@ export class UserService {
   }
 
   createUser(user: IUserRequest): Observable<IUser> {
-    return this.http.post<IUser>('/api/users/create', user);
+    return this.http.post<IUser>('https://pizzaria-la-bella-api.netlify.app/users/create', user);
   }
 }
