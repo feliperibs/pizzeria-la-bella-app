@@ -8,8 +8,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class UserService {
   isAdmin = new BehaviorSubject<boolean>(false)
   constructor(private http: HttpClient) {
-    this.user = !!localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') as string) : null;~
-    this.isAdmin.next(!!this.user.is_admin);
+    this.user = !!localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') as string) : null;
+    this.isAdmin.next(!!this.user?.is_admin);
 
   }
 

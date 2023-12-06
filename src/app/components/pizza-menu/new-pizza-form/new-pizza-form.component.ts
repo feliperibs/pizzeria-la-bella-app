@@ -13,7 +13,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { IPizza } from '../../../model/pizza-interface';
+import { IPizza, IPizzaRequest } from '../../../model/pizza-interface';
 import { PizzaService } from '../../../services/pizza.service';
 
 @Component({
@@ -36,7 +36,7 @@ export class NewPizzaFormComponent implements OnInit {
   @Output() loadPizzas = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
 
-  pizzas: IPizza[] = [];
+  pizzas: IPizzaRequest[] = [];
   pizzaForm!: FormGroup;
 
   constructor(
